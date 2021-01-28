@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { Meta, Story } from '@storybook/react';
 import Lyrics, { LyricsProps } from '../src/Lyrics';
 import internationale_chinese_txt from 'raw-loader!./internationale-chinese.txt';
@@ -31,4 +31,23 @@ Default.args = {
   lyrics: internationale_chinese_txt,
 };
 
-export const Full = () => <Lyrics lyrics="[]" />;
+export const Full = () => {
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const [time, setTime] = useState(0);
+
+  return (
+    <div>
+      <audio
+        ref={audioRef}
+        src={internationale_chinese_ogg}
+        onTimeUpdate={(e) => setTime(e.currentTarget.currentTime)}
+        controls
+      />
+      <Lyrics
+        lyrics={internationale_chinese_txt}
+        time={time}
+        onTimeChange={(t) => (audioRef.current.currentTime = t)}
+      />
+    </div>
+  );
+};

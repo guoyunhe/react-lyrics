@@ -1,44 +1,40 @@
-import React, {
-  HTMLAttributes,
-  ReactElement,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
+import React, { HTMLAttributes, ReactElement, useMemo } from 'react';
 import LyricsLine from './LyricsLine';
 import parseLyrics from './parseLyrics';
 
 export interface LyricsProps extends HTMLAttributes<HTMLDivElement> {
-  /** Lyrics text with timestamps  */
+  /** Lyrics text with timestamps */
   lyrics: string;
+  /** Media playback status */
+  status?: 'waiting' | 'playing' | 'paused' | 'ended';
+  /** Media progress time in seconds */
+  time: number;
+  /** Set media progress time in seconds */
+  onTimeChange?: (time: number) => void;
 }
 
-// Please do not use types off of a default export module or else Storybook Docs will suffer.
-// see: https://github.com/storybookjs/storybook/issues/9556
 /**
- * A custom Thing component. Neat!
+ * Lyrics player of React.
  */
-export default function Lyrics({ lyrics }: LyricsProps): ReactElement {
+export default function Lyrics({
+  lyrics,
+  status = 'waiting',
+  time,
+}: LyricsProps): ReactElement {
   const parsed = useMemo(() => parseLyrics(lyrics), [lyrics]);
-  const [time, setTime] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setTime(time + 1);
-    }, 100);
-    return () => clearInterval(interval);
-  }, [time]);
 
   return (
-    <div>
-      {parsed.map((line, index) => (
-        <LyricsLine
-          key={index}
-          active={line.startsAt < time && line.endsAt > time}
-        >
-          {line.content}
-        </LyricsLine>
-      ))}
+    <div className={`lyrics lyrics--${status}`}>
+      <div className={`lyrics__inner`}>
+        {parsed.map((line, index) => (
+          <LyricsLine
+            key={index}
+            active={line.startsAt < time && line.endsAt > time}
+          >
+            {line.content}
+          </LyricsLine>
+        ))}
+      </div>
     </div>
   );
 }
