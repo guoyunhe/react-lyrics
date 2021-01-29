@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { Meta, Story } from '@storybook/react';
 import Lyrics, { LyricsProps } from '../src/Lyrics';
+import '../src/index.css';
 import internationale_chinese_txt from 'raw-loader!./internationale-chinese.txt';
 import internationale_chinese_ogg from 'url-loader!./internationale-chinese.ogg';
 

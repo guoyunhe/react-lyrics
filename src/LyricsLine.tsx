@@ -1,5 +1,4 @@
 import React, { ReactChild, ReactElement } from 'react';
-import './LyricsLine.css';
 
 export interface LyricsLineProps {
   active?: boolean;

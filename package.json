@@ -1,8 +1,11 @@
 {
+  "name": "react-lyrics",
   "version": "0.1.0",
   "license": "MIT",
   "main": "dist/index.js",
+  "module": "dist/react-lyrics.esm.js",
   "typings": "dist/index.d.ts",
+  "style": "src/index.css",
   "files": [
     "dist",
     "src"
@@ -35,9 +38,7 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "react-lyrics",
   "author": "Guo Yunhe",
-  "module": "dist/react-lyrics.esm.js",
   "size-limit": [
     {
       "path": "dist/react-lyrics.cjs.production.min.js",
