@@ -46,7 +46,11 @@ export const Full = () => {
       <Lyrics
         lyrics={internationale_chinese_txt}
         time={time}
-        onTimeChange={(t) => (audioRef.current.currentTime = t)}
+        onTimeChange={(t) => {
+          if (audioRef.current) {
+            audioRef.current.currentTime = t;
+          }
+        }}
       />
     </div>
   );

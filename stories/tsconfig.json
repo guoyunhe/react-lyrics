@@ -1,0 +1,6 @@
+{
+  // Storybook has its own tsconfig and will ignore this file when compiling.
+  // This file is only used to prevent vs code and eslint throwing errors.
+  "extends": "../tsconfig.json",
+  "include": ["."]
+}
